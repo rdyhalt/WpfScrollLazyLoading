@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FusionMVVM;
 using FusionMVVM.Command;
 
@@ -11,32 +8,38 @@ namespace WpfScrollLazyLoading.ViewModel
 {
     public class MainViewModel : ViewModelBase, IMainViewModel
     {
-        public int TotalCount { get; }
         public ObservableCollection<string> Items { get; } = new ObservableCollection<string>();
-        public RelayCommand ChunkLoaderCommand { get; }
-
-        private bool _doneGetMoreStuff;
-
+        public ObservableCollection<string> Items2 { get; } = new ObservableCollection<string>();
+        public RelayCommand ScrollToBottomCommand { get; }
+        public RelayCommand ScrollToBottomCommand2 { get; }
 
         public MainViewModel()
         {
-            ChunkLoaderCommand = new RelayCommand(GetMoreStuff);
+            ScrollToBottomCommand = new RelayCommand(GetMoreStuff);
+            ScrollToBottomCommand2 = new RelayCommand(GetFoo);
 
+            GetFoo();
             GetMoreStuff();
+        }
+
+        private void GetFoo()
+        {
+            Console.WriteLine("GetFoo... @ " + DateTime.Now);
+
+            foreach (int i in Enumerable.Range(1, 15))
+            {
+                Items2.Add($"Item2 {Guid.NewGuid()}");
+            }
         }
 
         private void GetMoreStuff()
         {
-            if (_doneGetMoreStuff) return;
-
             Console.WriteLine("GetMoreStuff... @ " + DateTime.Now);
 
             foreach (int i in Enumerable.Range(1, 21))
             {
                 Items.Add($"Item {Guid.NewGuid()}");
             }
-
-
         }
     }
 }

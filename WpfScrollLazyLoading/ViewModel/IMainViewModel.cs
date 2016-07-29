@@ -5,11 +5,10 @@ namespace WpfScrollLazyLoading.ViewModel
 {
     public interface IMainViewModel
     {
-        int TotalCount { get; }
-
         ObservableCollection<string> Items { get; }
+        ObservableCollection<string> Items2 { get; }
 
-        RelayCommand ChunkLoaderCommand { get; }
-        
+        RelayCommand ScrollToBottomCommand { get; }
+        RelayCommand ScrollToBottomCommand2 { get; }
     }
 }

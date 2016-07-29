@@ -9,24 +9,37 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModel:DesignMainViewModel, IsDesignTimeCreatable=True}"
        
-        Title="MainWindow" Height="350" Width="525"
-        >
+        Title="MainWindow" Height="400" Width="575">
     <DockPanel>
 
-        <TextBlock DockPanel.Dock="Top" Margin="5" >Total count: <Run Text="{Binding Path=TotalCount, Mode=OneWay}" /> - Current count: <Run Text="{Binding Path=Items.Count, Mode=OneWay}"/></TextBlock>
+        <TextBlock DockPanel.Dock="Top" Margin="5" >Current count in Items: <Run Text="{Binding Path=Items.Count, Mode=OneWay}"/> - Current count in Items2: <Run Text="{Binding Path=Items2.Count, Mode=OneWay}" /></TextBlock>
 
-        <!--<ScrollViewer wpfScrollLazyLoading:ScrollHelper.ScrollToBottom="{Binding Path=ChunkLoaderCommand}">-->
+        <UniformGrid Rows="1">
             <ListBox DockPanel.Dock="Top" Margin="5" ItemsSource="{Binding Path=Items}"
-                     
-                     wpfScrollLazyLoading:ScrollHelper.ScrollToBottom="{Binding Path=ChunkLoaderCommand}">
-
-
+                     wpfScrollLazyLoading:ScrollToBottomAttachedProperty.ScrollToBottom="{Binding Path=ScrollToBottomCommand}">
 
             </ListBox>
-        <!--</ScrollViewer>-->
+
+            <ListBox DockPanel.Dock="Top" Margin="5" ItemsSource="{Binding Path=Items2}"
+                     wpfScrollLazyLoading:ScrollToBottomAttachedProperty.ScrollToBottom="{Binding Path=ScrollToBottomCommand2}">
+
+            </ListBox>
+        </UniformGrid>
 
     </DockPanel>
 </Window>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
